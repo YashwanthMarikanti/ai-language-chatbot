@@ -1,16 +1,16 @@
-async function sendMessage(){
+async function sendMessage() {
 
 let input = document.getElementById("userInput").value;
 let lang = document.getElementById("language").value;
 
 document.getElementById("chat").innerHTML +=
-"<p><b>You:</b> "+input+"</p>";
+"<p><b>You:</b> " + input + "</p>";
 
-const res = await fetch(
-"https://libretranslate.de/translate",
-{
-method:"POST",
-headers: { "Content-Type": "application/json" },
+const response = await fetch("https://translate.argosopentech.com/translate", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
 body: JSON.stringify({
 q: input,
 source: "auto",
@@ -19,9 +19,10 @@ format: "text"
 })
 });
 
-const data = await res.json();
+const data = await response.json();
 
 document.getElementById("chat").innerHTML +=
-"<p><b>Bot:</b> "+data.translatedText+"</p>";
+"<p><b>Bot:</b> " + data.translatedText + "</p>";
 
+document.getElementById("userInput").value = "";
 }
